@@ -1,0 +1,51 @@
+:root {
+  /* Brand & Action Colors */
+  --color-brand-primary: #009287;
+  --color-brand-secondary: #f3c000;
+  --color-text-on-brand: #ffffff;
+
+  /* State Colors */
+  --color-brand-primary-hover: #007a71;
+  --color-brand-secondary-hover: #d8a900;
+
+  /* Neutral Backgrounds & Surfaces */
+  --color-background: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-surface-dim: #efefef;
+
+  /* Neutral Text Colors */
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-disabled: #a0a0a0;
+
+  /* Utility & Borders */
+  --color-border: #cccccc;
+  --color-disabled-bg: #eaeaea;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Brand & Action Colors */
+    --color-brand-primary: #00ab95;
+    --color-brand-secondary: #f3c000;
+    --color-text-on-brand: #111111;
+
+    /* State Colors */
+    --color-brand-primary-hover: #00c6ae;
+    --color-brand-secondary-hover: #ffd447;
+
+    /* Neutral Backgrounds & Surfaces */
+    --color-background: #1a1a1a;
+    --color-surface: #2c2c2c;
+    --color-surface-dim: #3a3a3a;
+
+    /* Neutral Text Colors */
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #aaaaaa;
+    --color-text-disabled: #666666;
+
+    /* Utility & Borders */
+    --color-border: #444444;
+    --color-disabled-bg: #3a3a3a;
+  }
+}
