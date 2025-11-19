@@ -1,20 +1,19 @@
 # TV Show Dashboard
 
-A modern, accessible Vue 3 application for browsing and discovering TV shows using the TVMaze API.
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-- [Development](#development)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Testing](#testing)
-- [Accessibility](#accessibility)
-
 ## 🎯 Overview
 
 TV Show Dashboard is a responsive web application that allows users to explore TV shows categorized by genre, view detailed information about each show, and search for their favorite series. The application emphasizes clean code, reusability, and accessibility while maintaining a simple yet engaging user interface.
+
+## ✨ Features
+
+- **Genre-Based Browsing**: Shows organized by genre (Drama, Comedy, Sports, etc.)
+- **Smart Sorting**: Content sorted by rating within each genre
+- **Show Details**: Comprehensive information page for each TV show
+- **Search Functionality**: Quick search by show name
+- **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
+- **Accessibility First**: WCAG compliant with keyboard navigation and screen reader support
+- **Horizontal Scrolling**: Modern UI with smooth horizontal lists
+- **Theme Support**: Light and Dark Mode support
 
 ## 🚀 Getting Started
 
@@ -64,17 +63,6 @@ npm run format
 # Type check
 npm run type-check
 ```
-
-## ✨ Features
-
-- **Genre-Based Browsing**: Shows organized by genre (Drama, Comedy, Sports, etc.)
-- **Smart Sorting**: Content sorted by rating within each genre
-- **Show Details**: Comprehensive information page for each TV show
-- **Search Functionality**: Quick search by show name
-- **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
-- **Accessibility First**: WCAG compliant with keyboard navigation and screen reader support
-- **Horizontal Scrolling**: Modern UI with smooth horizontal lists
-- **Theme Support**: Light and Dark Mode support
 
 ## 🛠 Tech Stack
 
