@@ -7,6 +7,9 @@ import './assets/styles/global.css'
 
 <template>
   <HelloWorld msg="MOVIE BANK" />
+  <div id="app">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped></style>
