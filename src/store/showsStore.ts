@@ -1,8 +1,14 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { fetchAllShows, fetchShowById, searchShows } from '../api/showsApi'
+import { fetchAllShows, fetchShowById, searchShows, ApiError } from '../api/showsApi'
 import { groupShowsByGenre, sortShowsByRating } from '../utils/showsUtils'
 import type { Show, GenreGroup } from '../types/showsTypes'
+
+export interface ErrorDetails {
+  message: string
+  statusCode?: number
+  statusText?: string
+}
 
 export const useShowsStore = defineStore('shows', () => {
   // State
@@ -10,7 +16,7 @@ export const useShowsStore = defineStore('shows', () => {
   const selectedShow = ref<Show | null>(null)
   const searchResults = ref<Show[]>([])
   const loading = ref(false)
-  const error = ref<string | null>(null)
+  const error = ref<ErrorDetails | null>(null)
   const searchQuery = ref('')
 
   // Computed
@@ -38,7 +44,17 @@ export const useShowsStore = defineStore('shows', () => {
     try {
       shows.value = await fetchAllShows()
     } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Failed to load shows'
+      if (e instanceof ApiError) {
+        error.value = {
+          message: e.message,
+          statusCode: e.statusCode,
+          statusText: e.statusText,
+        }
+      } else {
+        error.value = {
+          message: e instanceof Error ? e.message : 'Failed to load shows',
+        }
+      }
       console.error('Error loading shows:', e)
     } finally {
       loading.value = false
@@ -60,7 +76,17 @@ export const useShowsStore = defineStore('shows', () => {
         selectedShow.value = await fetchShowById(id)
       }
     } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Failed to load show'
+      if (e instanceof ApiError) {
+        error.value = {
+          message: e.message,
+          statusCode: e.statusCode,
+          statusText: e.statusText,
+        }
+      } else {
+        error.value = {
+          message: e instanceof Error ? e.message : 'Failed to load show',
+        }
+      }
       console.error('Error loading show:', e)
     } finally {
       loading.value = false
@@ -82,7 +108,17 @@ export const useShowsStore = defineStore('shows', () => {
       const results = await searchShows(query)
       searchResults.value = sortShowsByRating(results)
     } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Search failed'
+      if (e instanceof ApiError) {
+        error.value = {
+          message: e.message,
+          statusCode: e.statusCode,
+          statusText: e.statusText,
+        }
+      } else {
+        error.value = {
+          message: e instanceof Error ? e.message : 'Search failed',
+        }
+      }
       console.error('Error searching shows:', e)
     } finally {
       loading.value = false
