@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AppHeader from './components/Layout/AppHeader/AppHeader.vue'
 import AppFooter from './components/Layout/AppFooter/AppFooter.vue'
 
 import './assets/styles/reset.css'
@@ -9,7 +8,6 @@ import './assets/styles/global.css'
 
 <template>
   <div id="app">
-    <AppHeader />
     <RouterView />
     <AppFooter />
   </div>

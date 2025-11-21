@@ -31,9 +31,6 @@ const swiperBreakpoints = {
     <!-- Section Header -->
     <header class="section-header">
       <h2 class="section-title">{{ title }}</h2>
-      <button class="view-all-btn" @click="emit('viewAll')">
-        View All <span class="arrow">→</span>
-      </button>
     </header>
 
     <!-- Carousel Content -->
