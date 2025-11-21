@@ -123,9 +123,8 @@ onMounted(async () => {
   min-height: 100vh;
 }
 
-.main-content {
-  padding-top: var(--spacing-8);
-  padding-bottom: var(--spacing-12);
+.container {
+  padding: var(--spacing-8) var(--spacing-12);
 }
 
 .genre-sections-list {

@@ -44,7 +44,7 @@ defineEmits<{
 .home-hero {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-8) 0;
+  padding: var(--spacing-8);
 }
 
 .hero-title {

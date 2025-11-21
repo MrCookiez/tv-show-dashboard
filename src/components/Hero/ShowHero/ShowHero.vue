@@ -44,7 +44,10 @@ const goBack = () => {
 .show-hero {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-8) 0;
+}
+
+.container {
+  padding: var(--spacing-8) var(--spacing-12);
 }
 
 .hero-title {
@@ -105,14 +108,19 @@ const goBack = () => {
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.2s ease;
-  width: 100%;
-  max-width: 300px;
   margin: var(--spacing-8) auto;
-  width: fit-content;
+  width: 100%;
 }
 
 .back-btn:hover {
   background-color: var(--color-surface-dim);
   border-color: var(--color-text-secondary);
+}
+
+@media screen and (min-width: 768px) {
+  .back-btn {
+    width: fit-content;
+    margin: var(--spacing-8) 0 0 0;
+  }
 }
 </style>
