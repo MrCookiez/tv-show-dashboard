@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import AppHeader from './components/Layout/AppHeader/AppHeader.vue'
+import AppFooter from './components/Layout/AppFooter/AppFooter.vue'
+
 import './assets/styles/reset.css'
 import './assets/styles/theme.css'
 import './assets/styles/global.css'
@@ -6,21 +9,17 @@ import './assets/styles/global.css'
 
 <template>
   <div id="app">
-    <nav class="demo-nav">
-      <div class="container">
-        <RouterLink to="/">Home (All Shows)</RouterLink>
-        <RouterLink to="/show/169">Details (Breaking Bad)</RouterLink>
-        <RouterLink to="/search">Search (Game of Thrones)</RouterLink>
-      </div>
-    </nav>
-
+    <AppHeader />
     <RouterView />
+    <AppFooter />
   </div>
 </template>
 
 <style scoped>
 #app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .demo-nav {
