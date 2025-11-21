@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import ShowCard from './Card.vue'
+import Card from './Card.vue'
+import { mockShow } from '../../mock/mockData'
 
 const pushMock = vi.fn()
 vi.mock('vue-router', () => ({
@@ -9,42 +10,9 @@ vi.mock('vue-router', () => ({
   }),
 }))
 
-describe('ShowCard', () => {
-  const mockShow = {
-    id: 123,
-    name: 'Breaking Bad',
-    type: 'Scripted',
-    language: 'English',
-    genres: ['Drama', 'Crime', 'Thriller'],
-    status: 'Ended',
-    runtime: 60,
-    averageRuntime: 60,
-    premiered: '2008-01-20',
-    ended: '2013-09-29',
-    officialSite: 'http://www.amc.com/shows/breaking-bad',
-    schedule: { time: '22:00', days: ['Sunday'] },
-    rating: { average: 9.5 },
-    weight: 99,
-    network: {
-      id: 1,
-      name: 'AMC',
-      country: { name: 'United States', code: 'US', timezone: 'America/New_York' },
-      officialSite: null,
-    },
-    webChannel: null,
-    externals: { tvrage: 18164, thetvdb: 81189, imdb: 'tt0903747' },
-    image: {
-      medium: 'https://example.com/breaking-bad-medium.jpg',
-      original: 'https://example.com/breaking-bad-original.jpg',
-    },
-    summary: '<p>Detailed summary here</p>',
-    updated: 1600000000,
-    _links: { self: { href: '' }, previousepisode: { href: '' } },
-    url: 'http://tvmaze.com/shows/123/breaking-bad',
-  }
-
+describe('Card', () => {
   it('renders the show title', () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -52,7 +20,7 @@ describe('ShowCard', () => {
   })
 
   it('renders the rating correctly', () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -60,7 +28,7 @@ describe('ShowCard', () => {
   })
 
   it('renders the first two genres joined by a separator', () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -68,7 +36,7 @@ describe('ShowCard', () => {
   })
 
   it('renders the image with the correct src', () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -80,7 +48,7 @@ describe('ShowCard', () => {
   it('uses a placeholder if no image is provided', () => {
     const showWithoutImage = { ...mockShow, image: null }
 
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: showWithoutImage },
     })
 
@@ -89,7 +57,7 @@ describe('ShowCard', () => {
   })
 
   it('navigates to details page on click', async () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -99,7 +67,7 @@ describe('ShowCard', () => {
   })
 
   it('navigates to details page on Enter key (accessibility)', async () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
@@ -109,7 +77,7 @@ describe('ShowCard', () => {
   })
 
   it('handles image loading state correctly', async () => {
-    const wrapper = mount(ShowCard, {
+    const wrapper = mount(Card, {
       props: { show: mockShow },
     })
 
