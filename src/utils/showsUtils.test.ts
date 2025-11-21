@@ -5,15 +5,15 @@ import {
   filterShowsByGenre,
   getUniqueGenres,
   stripHtml,
-} from './shows'
-import type { Show } from '../types/shows'
+} from './showsUtils'
+import type { Show } from '../types/showsTypes'
 import { mockShow } from '../mock/mockData'
 
 /**
  * Helper factory to create a Show object with default valid data.
  * Allows overriding specific fields for testing purposes.
  */
-function createMockShow(overrides: Partial<Show> = {}): Show {
+export function createMockShow(overrides: Partial<Show> = {}): Show {
   return {
     ...mockShow,
     ...overrides,

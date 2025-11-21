@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Card from '../Card/Card.vue'
-import type { Show } from '../../types/shows'
+import type { Show } from '../../types/showsTypes'
 
 defineProps<{
   shows: Show[]

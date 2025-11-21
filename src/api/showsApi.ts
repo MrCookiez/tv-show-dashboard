@@ -1,4 +1,4 @@
-import type { Show, SearchResult } from '../types/shows'
+import type { Show, SearchResult } from '../types/showsTypes'
 
 const BASE_URL = 'https://api.tvmaze.com'
 

@@ -1,4 +1,4 @@
-import type { Show, GenreGroup } from '../types/shows'
+import type { Show, GenreGroup } from '../types/showsTypes'
 
 export function groupShowsByGenre(shows: Show[]): GenreGroup[] {
   const genreMap = new Map<string, Show[]>()

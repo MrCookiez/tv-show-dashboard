@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 // @ts-ignore: no type declarations for CSS import from 'swiper'
 import 'swiper/css'
 import Card from '../Card/Card.vue'
-import type { Show } from '../../types/shows'
+import type { Show } from '../../types/showsTypes'
 
 defineProps<{
   title: string

@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { fetchAllShows, fetchShowById, searchShows } from '../api/shows'
-import { groupShowsByGenre, sortShowsByRating } from '../utils/shows'
-import type { Show, GenreGroup } from '../types/shows'
+import { fetchAllShows, fetchShowById, searchShows } from '../api/showsApi'
+import { groupShowsByGenre, sortShowsByRating } from '../utils/showsUtils'
+import type { Show, GenreGroup } from '../types/showsTypes'
 
 export const useShowsStore = defineStore('shows', () => {
   // State

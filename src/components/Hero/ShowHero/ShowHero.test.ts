@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import ShowHero from './ShowHero.vue'
 import { mockShow } from '../../../mock/mockData'
+import { createMockShow } from '../../../utils/showsUtils.test'
 
 describe('ShowHero', () => {
   it('renders show name', () => {
@@ -38,7 +39,11 @@ describe('ShowHero', () => {
 
   it('displays summary without HTML tags', () => {
     const wrapper = mount(ShowHero, {
-      props: { show: mockShow },
+      props: {
+        show: createMockShow({
+          summary: '<p>A high school chemistry teacher...</p>',
+        }),
+      },
     })
 
     const summary = wrapper.find('.hero-summary').text()
