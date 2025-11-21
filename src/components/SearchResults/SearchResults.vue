@@ -60,6 +60,7 @@ defineEmits<{
 .results-header strong {
   font-weight: var(--font-weight-bold);
   color: var(--color-brand-primary);
+  color: var(--color-brand-surface);
 }
 
 .clear-btn {

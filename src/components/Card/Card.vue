@@ -162,7 +162,7 @@ const onImageLoad = () => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--color-surface);
+  color: var(--color-text-on-brand);
 }
 
 .meta {

@@ -51,6 +51,12 @@ const onInput = () => {
   transition: border-color 0.2s ease;
 }
 
+@media (prefers-color-scheme: dark) {
+  .search-bar {
+    border-color: var(--color-brand-secondary);
+  }
+}
+
 .search-bar:focus-within {
   border-color: var(--color-brand-primary);
 }

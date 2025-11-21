@@ -118,6 +118,12 @@ const goBack = () => {
   border-color: transparent;
 }
 
+@media (prefers-color-scheme: dark) {
+  .back-btn:hover {
+    color: var(--color-text-surface);
+  }
+}
+
 @media screen and (min-width: 768px) {
   .back-btn {
     width: fit-content;
