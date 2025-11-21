@@ -86,7 +86,7 @@ const goBack = () => {
 }
 
 /* Mobile */
-@media (min-width: 768px) {
+@media (min-width: Breakpoint) {
   .show-hero {
     padding: var(--spacing-12) 0;
   }
@@ -116,6 +116,13 @@ const goBack = () => {
   background-color: var(--color-brand-secondary);
   color: var(--color-surface);
   border-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .back-btn {
+    width: fit-content;
+    margin: var(--spacing-8) 0 0 0;
+  }
 }
 
 @media screen and (min-width: 768px) {
