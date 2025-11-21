@@ -86,7 +86,7 @@ const goBack = () => {
 }
 
 /* Mobile */
-@media (min-width: Breakpoint) {
+@media (min-width: 768px) {
   .show-hero {
     padding: var(--spacing-12) 0;
   }
