@@ -2,77 +2,123 @@
 
 <template>
   <div class="about">
-    <h1>About the app</h1>
-    <h2>📺 Welcome to the TV Show Dashboard</h2>
-    <p>
-      The **TV Show Dashboard** is a single-page application built to offer a seamless and intuitive
-      experience for discovering and exploring television shows. Using the extensive data provided
-      by the <a href="http://www.tvmaze.com/api" target="_blank">TVMaze API</a>, this application
-      organizes a vast catalog of series, allowing users to quickly find what they're looking for.
-    </p>
+    <div class="container">
+      <h1>About TV Show Dashboard</h1>
 
-    <h2>✨ Key Features</h2>
-    <h3>Categorized and Sorted Lists</h3>
-    <p>
-      Shows are intelligently **categorized by their genre** (e.g., Drama, Comedy, Sports) and
-      presented in clean, **horizontally scrollable lists**. Within each genre, the shows are then
-      **sorted by their rating** to highlight the most popular and critically acclaimed series
-      first. This design choice ensures efficient browsing across diverse categories.
-    </p>
+      <section class="content-section">
+        <h2>Overview</h2>
+        <p>
+          TV Show Dashboard is a modern web application built to explore and discover TV shows.
+          Browse shows by genre, search for your favorites, and view detailed information about each
+          show.
+        </p>
+      </section>
 
-    <h3>Detailed Show Information</h3>
-    <p>
-      Selecting any show takes you to a dedicated **Show Details page**, where you can explore
-      comprehensive information including the synopsis, cast, ratings, and more.
-    </p>
+      <section class="content-section">
+        <h2>Features</h2>
+        <ul>
+          <li>Browse shows organized by genre</li>
+          <li>Horizontal scrolling lists for easy navigation</li>
+          <li>Search shows by name</li>
+          <li>Filter by genre</li>
+          <li>View detailed show information</li>
+          <li>Responsive design for all devices</li>
+          <li>Dark and light mode support</li>
+        </ul>
+      </section>
 
-    <h3>Quick Search Functionality</h3>
-    <p>
-      A responsive **search bar** is available across the application, allowing users to
-      effortlessly find shows by name, providing instant results as they type.
-    </p>
+      <section class="content-section">
+        <h2>Technology</h2>
+        <p>Built with modern web technologies:</p>
+        <ul>
+          <li><strong>Vue 3</strong> - Progressive JavaScript framework</li>
+          <li><strong>TypeScript</strong> - Type-safe development</li>
+          <li><strong>Pinia</strong> - State management</li>
+          <li><strong>Vue Router</strong> - Client-side routing</li>
+          <li><strong>Zod</strong> - Runtime validation</li>
+          <li><strong>Vite</strong> - Fast build tool</li>
+          <li><strong>Vitest</strong> - Unit testing</li>
+        </ul>
+      </section>
 
-    <h2>🛠️ Under the Hood: Technical Excellence</h2>
-    <p>
-      This dashboard serves as a demonstration of modern, maintainable, and high-quality front-end
-      development. It is engineered with a strong focus on:
-    </p>
-    <ul>
-      <li>
-        **Clean and Reusable Code:** Leveraging best practices and **Programming Patterns** with
-        **VueJS 3** and **TypeScript** for robust component architecture.
-      </li>
-      <li>
-        **State Management:** Utilizing **PiniaJS** for predictable and efficient application state
-        handling.
-      </li>
-      <li>
-        **Design and Responsiveness:** Implementing a simple yet eye-catching UI with **Scoped CSS**
-        and a focus on **Responsive Design** to ensure a flawless experience on desktop, tablet, and
-        **mobile devices**.
-      </li>
-      <li>
-        **Accessibility (A11Y):** Built with accessibility standards in mind to ensure the
-        application is usable by the broadest possible audience.
-      </li>
-    </ul>
-
-    <h3>Technology Stack</h3>
-    <p>
-      The application is powered by **VueJS 3** and **Node 24v**, supported by essential tooling
-      such as **Vite** for fast development, **Vue Router** for navigation, **Vue Test Utils (VTU)**
-      and **Vitest** for comprehensive unit testing, and data validation libraries like **Zod** and
-      **JoiJS** for data integrity.
-    </p>
+      <section class="content-section">
+        <h2>Data Source</h2>
+        <p>
+          All TV show data is provided by the
+          <a
+            href="https://www.tvmaze.com/api"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link"
+          >
+            TVMaze API
+          </a>
+          , a comprehensive database of TV show information.
+        </p>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .about {
   padding: var(--spacing-8) 0;
+  min-height: 60vh;
 }
 
 h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-8);
+  color: var(--color-text-primary);
+}
+
+.content-section {
+  margin-bottom: var(--spacing-8);
+}
+
+.content-section:last-child {
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-primary);
+}
+
+p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+ul {
+  list-style: disc;
+  padding-left: var(--spacing-6);
+  color: var(--color-text-secondary);
+}
+
+li {
   margin-bottom: var(--spacing-2);
+  line-height: var(--line-height-relaxed);
+}
+
+.link {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-brand-primary-hover);
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
 }
 </style>
