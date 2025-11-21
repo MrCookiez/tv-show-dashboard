@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 // @ts-ignore: no type declarations for CSS import from 'swiper'
 import 'swiper/css'
@@ -10,13 +11,13 @@ defineProps<{
   shows: Show[]
 }>()
 
-// Emitting an event in case you want to handle navigation later
 const emit = defineEmits<{
   (e: 'viewAll'): void
 }>()
 
-// Swiper Configuration
-// Showing partial slides (.2) encourages users to scroll horizontally
+// 2. Create an array containing the module
+const modules = [Mousewheel]
+
 const swiperBreakpoints = {
   320: { slidesPerView: 2.2, spaceBetween: 16 },
   480: { slidesPerView: 3.2, spaceBetween: 16 },
@@ -28,14 +29,18 @@ const swiperBreakpoints = {
 
 <template>
   <section class="group-section">
-    <!-- Section Header -->
     <header class="section-header">
       <h2 class="section-title">{{ title }}</h2>
     </header>
 
-    <!-- Carousel Content -->
     <div class="section-content">
-      <Swiper :breakpoints="swiperBreakpoints" :space-between="20" class="show-swiper">
+      <Swiper
+        :modules="modules"
+        :mousewheel="{ forceToAxis: true }"
+        :breakpoints="swiperBreakpoints"
+        :space-between="20"
+        class="show-swiper"
+      >
         <SwiperSlide v-for="show in shows" :key="show.id">
           <Card :show="show" />
         </SwiperSlide>
@@ -85,19 +90,17 @@ const swiperBreakpoints = {
   line-height: 1;
 }
 
-/* Swiper Adjustments */
 .show-swiper {
-  padding: var(--spacing-2); /* Padding for hover shadows */
-  margin: calc(var(--spacing-2) * -1); /* Negative margin to allow shadows */
+  padding: var(--spacing-2);
+  margin: calc(var(--spacing-2) * -1);
 }
 
 :deep(.swiper-wrapper) {
-  /* Ensure flex behavior for slides so cards are same height */
   align-items: stretch;
 }
 
 :deep(.swiper-slide) {
-  height: auto; /* Allow cards to define height */
+  height: auto;
 }
 
 @media (min-width: 1024px) {
