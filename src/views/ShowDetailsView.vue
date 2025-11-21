@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { onMounted, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useShowsStore } from '../store/showsStore'
 import { stripHtml } from '../utils/showsUtils'
 import ShowHero from '../components/Hero/ShowHero/ShowHero.vue'
 
 const route = useRoute()
+const router = useRouter()
 const showsStore = useShowsStore()
 
 const showId = computed(() => {
@@ -15,6 +16,19 @@ const showId = computed(() => {
 
 const loadShow = async (id: number) => {
   await showsStore.loadShowById(id)
+
+  // If there's an error after loading, navigate to error page
+  if (showsStore.error) {
+    router.push({
+      name: 'error',
+      query: {
+        code: showsStore.error.statusCode?.toString() || '500',
+        message: showsStore.error.message,
+      },
+    })
+    return
+  }
+
   // Scroll to top for better UX when switching shows
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -56,12 +70,6 @@ const cleanSummary = computed(() => {
     <div v-if="showsStore.loading" class="loading-state">
       <div class="spinner"></div>
       <p>Loading details...</p>
-    </div>
-
-    <!-- Error State -->
-    <div v-else-if="showsStore.error" class="error-state">
-      <h2>Oops!</h2>
-      <p>{{ showsStore.error }}</p>
     </div>
 
     <!-- Content -->
@@ -229,9 +237,8 @@ const cleanSummary = computed(() => {
   color: var(--color-text-primary);
 }
 
-/* Loading / Error States */
-.loading-state,
-.error-state {
+/* Loading State */
+.loading-state {
   display: flex;
   flex-direction: column;
   align-items: center;
