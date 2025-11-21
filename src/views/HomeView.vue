@@ -1,10 +1,56 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useShowsStore } from '../store/shows'
-import Section from '../components/Section/Section.vue'
 import HomeHero from '../components/Hero/HomeHero/HomeHero.vue'
+import SearchBar from '../components/SearchBar/SearchBar.vue'
+import SearchResults from '../components/SearchResult/SearchResult.vue'
+import Section from '../components/Section/Section.vue'
+import GenreFilter from '../components/GenreFilter/GenreFilter.vue'
 
 const showsStore = useShowsStore()
+
+// --- Local State ---
+const searchQuery = ref('')
+const selectedGenre = ref('All')
+
+// --- Computed Logic ---
+// 1. Determine if we are in "Search/Filter Mode"
+const isSearchActive = computed(() => {
+  const hasQuery = searchQuery.value.trim().length > 0
+  const hasGenreFilter = selectedGenre.value !== 'All'
+  return hasQuery || hasGenreFilter
+})
+
+// 2. Filter logic (Client-side filtering)
+const filteredShows = computed(() => {
+  if (!showsStore.hasShows) return []
+
+  let result = showsStore.shows
+
+  // Filter by Genre
+  if (selectedGenre.value !== 'All') {
+    result = result.filter(show => show.genres.includes(selectedGenre.value))
+  }
+
+  // Filter by Search Query (Case insensitive)
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase()
+    result = result.filter(show => show.name.toLowerCase().includes(query))
+  }
+
+  return result
+})
+
+// 3. Get available genres for the filter buttons
+const availableGenres = computed(() => {
+  return showsStore.genreGroups.map(g => g.genre)
+})
+
+// --- Actions ---
+const clearFilters = () => {
+  searchQuery.value = ''
+  selectedGenre.value = 'All'
+}
 
 onMounted(async () => {
   await showsStore.loadAllShows()
@@ -15,24 +61,35 @@ onMounted(async () => {
   <div class="home">
     <HomeHero>
       <template #search>
-        <div class="placeholder-box">Search Bar Placeholder</div>
+        <SearchBar v-model="searchQuery" />
       </template>
       <template #filters>
-        <div class="placeholder-box">Genre Filters Placeholder</div>
+        <GenreFilter v-model="selectedGenre" :genres="availableGenres" />
       </template>
     </HomeHero>
 
     <div class="container main-content">
+      <!-- Loading State -->
       <div v-if="showsStore.loading" class="loading-container">
         <div class="spinner"></div>
         <p>Loading library...</p>
       </div>
 
+      <!-- Error State -->
       <div v-else-if="showsStore.error" class="error-container">
         <p>Unable to load shows. {{ showsStore.error }}</p>
       </div>
 
-      <!-- Main Content: List of Genre Sections -->
+      <!-- VIEW A: Search Results -->
+      <SearchResults
+        v-else-if="isSearchActive"
+        :shows="filteredShows"
+        :search-query="searchQuery"
+        :selected-genre="selectedGenre"
+        @clear="clearFilters"
+      />
+
+      <!-- VIEW B: Browse by Genre (Default) -->
       <div v-else-if="showsStore.genreGroups.length" class="genre-sections-list">
         <Section
           v-for="group in showsStore.genreGroups"
@@ -42,8 +99,9 @@ onMounted(async () => {
         />
       </div>
 
+      <!-- Empty State (No API Data) -->
       <div v-else class="empty-state">
-        <p>No shows found.</p>
+        <p>No shows found in library.</p>
       </div>
     </div>
   </div>
@@ -62,7 +120,7 @@ onMounted(async () => {
 .genre-sections-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-12); /* Adds consistent space between sections */
+  gap: var(--spacing-12);
 }
 
 /* Loading / States */
@@ -93,14 +151,5 @@ onMounted(async () => {
   to {
     transform: rotate(360deg);
   }
-}
-
-.placeholder-box {
-  border: 1px dashed var(--color-border);
-  padding: var(--spacing-2);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.5);
 }
 </style>
