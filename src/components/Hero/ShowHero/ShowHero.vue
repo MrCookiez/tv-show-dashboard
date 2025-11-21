@@ -124,4 +124,11 @@ const goBack = () => {
     margin: var(--spacing-8) 0 0 0;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .back-btn {
+    width: fit-content;
+    margin: var(--spacing-8) 0 0 0;
+  }
+}
 </style>
