@@ -1,51 +1,51 @@
 :root {
   /* Brand & Action Colors */
-  --color-brand-primary: #009287;
-  --color-brand-secondary: #f3c000;
+  --color-brand-primary: #182234;
+  --color-brand-secondary: #cf118c;
   --color-text-on-brand: #ffffff;
 
   /* State Colors */
-  --color-brand-primary-hover: #007a71;
-  --color-brand-secondary-hover: #d8a900;
+  --color-brand-primary-hover: #2c3a57;
+  --color-brand-secondary-hover: #e639a6;
 
   /* Neutral Backgrounds & Surfaces */
-  --color-background: #ffffff;
-  --color-surface: #f9f9f9;
-  --color-surface-dim: #efefef;
+  --color-background: #f7f7f7;
+  --color-surface: #ffffff;
+  --color-surface-dim: #eeeeee;
 
   /* Neutral Text Colors */
-  --color-text-primary: #111111;
-  --color-text-secondary: #555555;
-  --color-text-disabled: #a0a0a0;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-disabled: #aaaaaa;
 
   /* Utility & Borders */
-  --color-border: #cccccc;
-  --color-disabled-bg: #eaeaea;
+  --color-border: #dddddd;
+  --color-disabled-bg: #f0f0f0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     /* Brand & Action Colors */
-    --color-brand-primary: #00ab95;
-    --color-brand-secondary: #f3c000;
-    --color-text-on-brand: #111111;
+    --color-brand-primary: #182234;
+    --color-brand-secondary: #cf118c;
+    --color-text-on-brand: #ffffff;
 
     /* State Colors */
-    --color-brand-primary-hover: #00c6ae;
-    --color-brand-secondary-hover: #ffd447;
+    --color-brand-primary-hover: #374a6b;
+    --color-brand-secondary-hover: #e639a6;
 
     /* Neutral Backgrounds & Surfaces */
-    --color-background: #1a1a1a;
-    --color-surface: #2c2c2c;
-    --color-surface-dim: #3a3a3a;
+    --color-background: #121212;
+    --color-surface: #1e1e1e;
+    --color-surface-dim: #2c2c2c;
 
     /* Neutral Text Colors */
-    --color-text-primary: #fafafa;
-    --color-text-secondary: #aaaaaa;
-    --color-text-disabled: #666666;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #cccccc;
+    --color-text-disabled: #606060;
 
     /* Utility & Borders */
     --color-border: #444444;
-    --color-disabled-bg: #3a3a3a;
+    --color-disabled-bg: #333333;
   }
 }

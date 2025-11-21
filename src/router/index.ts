@@ -19,6 +19,22 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/search',
+    name: 'search',
+    component: () => import('../views/SearchView.vue'),
+    meta: {
+      title: 'Search Shows',
+    },
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/About.vue'),
+    meta: {
+      title: 'About',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),
