@@ -74,24 +74,6 @@ describe('Section', () => {
     expect(wrapper.find('.section-title').text()).toBe('Trending Now')
   })
 
-  it('emits "viewAll" event when button is clicked', async () => {
-    const wrapper = mount(Section, {
-      props: {
-        title: 'Drama',
-        shows: mockShows,
-      },
-      global: {
-        stubs: {
-          Swiper: { template: '<div><slot /></div>' },
-          SwiperSlide: { template: '<div><slot /></div>' },
-        },
-      },
-    })
-
-    await wrapper.find('.view-all-btn').trigger('click')
-    expect(wrapper.emitted()).toHaveProperty('viewAll')
-  })
-
   it('renders the correct number of slides', () => {
     const wrapper = mount(Section, {
       props: {

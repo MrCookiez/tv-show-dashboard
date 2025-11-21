@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import type { Show } from '../../../types/shows'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 defineProps<{
   show: Show
 }>()
+
+const goBack = () => {
+  router.push('/')
+}
 </script>
 
 <template>
@@ -27,6 +34,8 @@ defineProps<{
       <p v-if="show.summary" class="hero-summary">
         {{ show.summary.replace(/<[^>]*>/g, '').substring(0, 200) }}...
       </p>
+
+      <button @click="goBack" class="back-btn">← Back to Home</button>
     </div>
   </section>
 </template>
@@ -82,5 +91,28 @@ defineProps<{
   .hero-title {
     font-size: var(--font-size-4xl);
   }
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+  margin: var(--spacing-8) auto;
+  width: fit-content;
+}
+
+.back-btn:hover {
+  background-color: var(--color-surface-dim);
+  border-color: var(--color-text-secondary);
 }
 </style>
