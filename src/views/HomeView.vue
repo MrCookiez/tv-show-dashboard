@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, watch } from 'vue'
 import { debounce } from 'lodash'
-import { useShowsStore } from '../store/shows'
-import { filterShowsByGenre } from '../utils/shows'
+import { useShowsStore } from '../store/showsStore'
+import { filterShowsByGenre } from '../utils/showsUtils'
 import Section from '../components/Section/Section.vue'
 import SearchResults from '../components/SearchResults/SearchResults.vue'
 import HomeHero from '../components/Hero/HomeHero/HomeHero.vue'

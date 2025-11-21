@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SearchResults from './SearchResults.vue'
-import type { Show } from '../../types/shows'
+import type { Show } from '../../types/showsTypes'
 
 describe('SearchResults', () => {
   // We define a full mock object to satisfy the Show interface

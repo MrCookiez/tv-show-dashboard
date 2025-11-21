@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useShowsStore } from '../store/shows'
-import { stripHtml } from '../utils/shows'
+import { useShowsStore } from '../store/showsStore'
+import { stripHtml } from '../utils/showsUtils'
 import ShowHero from '../components/Hero/ShowHero/ShowHero.vue'
 
 const route = useRoute()

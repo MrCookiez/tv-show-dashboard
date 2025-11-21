@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import type { Show } from '../../types/shows'
+import type { Show } from '../../types/showsTypes'
 
 const props = defineProps<{
   show: Show

@@ -5,8 +5,8 @@ import {
   filterShowsByGenre,
   getUniqueGenres,
   stripHtml,
-} from './shows'
-import type { Show } from '../types/shows'
+} from './showsUtils'
+import type { Show } from '../types/showsTypes'
 import { mockShow } from '../mock/mockData'
 
 /**
