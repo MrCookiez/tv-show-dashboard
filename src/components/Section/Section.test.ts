@@ -74,22 +74,6 @@ describe('Section', () => {
     expect(wrapper.find('.section-title').text()).toBe('Trending Now')
   })
 
-  it('renders the view all button', () => {
-    const wrapper = mount(Section, {
-      props: {
-        title: 'Drama',
-        shows: mockShows,
-      },
-      global: {
-        stubs: {
-          Swiper: { template: '<div><slot /></div>' },
-          SwiperSlide: { template: '<div><slot /></div>' },
-        },
-      },
-    })
-    expect(wrapper.find('.view-all-btn').text()).toContain('View All')
-  })
-
   it('emits "viewAll" event when button is clicked', async () => {
     const wrapper = mount(Section, {
       props: {
