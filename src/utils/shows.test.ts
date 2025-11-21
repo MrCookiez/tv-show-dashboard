@@ -7,6 +7,7 @@ import {
   stripHtml,
 } from './shows'
 import type { Show } from '../types/shows'
+import { mockShow } from '../mock/mockData'
 
 /**
  * Helper factory to create a Show object with default valid data.
@@ -14,38 +15,7 @@ import type { Show } from '../types/shows'
  */
 function createMockShow(overrides: Partial<Show> = {}): Show {
   return {
-    id: 1,
-    url: 'https://www.tvmaze.com/shows/1/test',
-    name: 'Test Show',
-    type: 'Scripted',
-    language: 'English',
-    genres: [],
-    status: 'Running',
-    runtime: 60,
-    averageRuntime: 60,
-    premiered: '2023-01-01',
-    ended: null,
-    officialSite: 'https://test.com',
-    schedule: { time: '20:00', days: ['Monday'] },
-    rating: { average: 5.0 },
-    weight: 90,
-    network: {
-      id: 1,
-      name: 'Test Network',
-      country: { name: 'United States', code: 'US', timezone: 'America/New_York' },
-      officialSite: null,
-    },
-    webChannel: null,
-    externals: { tvrage: 1, thetvdb: 1, imdb: 'tt1234567' },
-    image: {
-      medium: 'https://static.tvmaze.com/uploads/images/medium_portrait/1/1.jpg',
-      original: 'https://static.tvmaze.com/uploads/images/original_untouched/1/1.jpg',
-    },
-    summary: '<p>This is a <b>test</b> summary</p>',
-    updated: 1700000000,
-    _links: {
-      self: { href: 'https://api.tvmaze.com/shows/1' },
-    },
+    ...mockShow,
     ...overrides,
   }
 }

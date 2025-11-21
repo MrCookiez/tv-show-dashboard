@@ -2,60 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Section from './Section.vue'
 import Card from '../Card/Card.vue'
-
-// Mock Show Data
-const mockShows = [
-  {
-    id: 1,
-    name: 'Show 1',
-    rating: { average: 8.5 },
-    genres: ['Drama'],
-    image: { medium: 'img1.jpg', original: 'img1_orig.jpg' },
-    // ... minimalist mock of other required fields
-    type: 'Scripted',
-    language: 'English',
-    status: 'Running',
-    runtime: 60,
-    averageRuntime: 60,
-    premiered: '2022-01-01',
-    ended: null,
-    officialSite: null,
-    schedule: { time: '20:00', days: ['Monday'] },
-    weight: 100,
-    network: null,
-    webChannel: null,
-    externals: { tvrage: 0, thetvdb: 0, imdb: '' },
-    summary: '',
-    updated: 0,
-    _links: { self: { href: '' } },
-    url: '',
-  },
-  {
-    id: 2,
-    name: 'Show 2',
-    rating: { average: 7.5 },
-    genres: ['Comedy'],
-    image: { medium: 'img2.jpg', original: 'img2_orig.jpg' },
-    // ... minimalist mock
-    type: 'Scripted',
-    language: 'English',
-    status: 'Running',
-    runtime: 30,
-    averageRuntime: 30,
-    premiered: '2022-01-01',
-    ended: null,
-    officialSite: null,
-    schedule: { time: '20:00', days: ['Monday'] },
-    weight: 100,
-    network: null,
-    webChannel: null,
-    externals: { tvrage: 0, thetvdb: 0, imdb: '' },
-    summary: '',
-    updated: 0,
-    _links: { self: { href: '' } },
-    url: '',
-  },
-]
+import { mockShows } from '../../mock/mockData'
 
 describe('Section', () => {
   it('renders the section title', () => {
