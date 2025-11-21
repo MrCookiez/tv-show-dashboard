@@ -32,7 +32,7 @@ const goBack = () => {
       </div>
 
       <p v-if="show.summary" class="hero-summary">
-        {{ show.summary.replace(/<[^>]*>/g, '').substring(0, 200) }}...
+        {{ show.summary.replace(/<[^>]*>/g, '').substring(0, 160) }}...
       </p>
 
       <button @click="goBack" class="back-btn">← Back to Home</button>
