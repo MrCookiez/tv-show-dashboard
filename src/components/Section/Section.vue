@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// 1. Import the specific module
 import { Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 // @ts-ignore: no type declarations for CSS import from 'swiper'
@@ -51,9 +50,62 @@ const swiperBreakpoints = {
 </template>
 
 <style scoped>
-/* ... your existing styles remain unchanged ... */
 .group-section {
   margin-bottom: var(--spacing-10);
 }
-/* ... */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+  padding: 0 var(--spacing-1);
+}
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.view-all-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  transition: color 0.2s ease;
+}
+
+.view-all-btn:hover {
+  color: var(--color-brand-secondary);
+}
+
+.arrow {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.show-swiper {
+  padding: var(--spacing-2);
+  margin: calc(var(--spacing-2) * -1);
+}
+
+:deep(.swiper-wrapper) {
+  align-items: stretch;
+}
+
+:deep(.swiper-slide) {
+  height: auto;
+}
+
+@media (min-width: 1024px) {
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+}
 </style>
