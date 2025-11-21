@@ -1,55 +1,77 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
+import { debounce } from 'lodash'
 import { useShowsStore } from '../store/shows'
+import { filterShowsByGenre } from '../utils/shows' // Importing util for consistency
+import Section from '../components/Section/Section.vue'
+import SearchResult from '../components/SearchResult/SearchResult.vue'
 import HomeHero from '../components/Hero/HomeHero/HomeHero.vue'
 import SearchBar from '../components/SearchBar/SearchBar.vue'
-import SearchResults from '../components/SearchResult/SearchResult.vue'
-import Section from '../components/Section/Section.vue'
 import GenreFilter from '../components/GenreFilter/GenreFilter.vue'
 
 const showsStore = useShowsStore()
 
-// --- Local State ---
-const searchQuery = ref('')
+// --- Local State for UI Inputs ---
+const localSearchQuery = ref('')
 const selectedGenre = ref('All')
 
+// Debounce the store search action
+const debouncedStoreSearch = debounce((query: string) => {
+  showsStore.search(query)
+}, 500)
+
+// Watch local input -> Trigger Store Action
+watch(localSearchQuery, newQuery => {
+  const trimmed = newQuery.trim()
+
+  if (trimmed.length >= 3) {
+    debouncedStoreSearch(trimmed)
+  } else {
+    // If user clears input or it's too short, clear store search state
+    if (showsStore.searchQuery) {
+      showsStore.clearSearch()
+    }
+  }
+})
+
 // --- Computed Logic ---
-// 1. Determine if we are in "Search/Filter Mode"
+
 const isSearchActive = computed(() => {
-  const hasQuery = searchQuery.value.trim().length > 0
+  const hasValidQuery = localSearchQuery.value.trim().length >= 3
   const hasGenreFilter = selectedGenre.value !== 'All'
-  return hasQuery || hasGenreFilter
+  return hasValidQuery || hasGenreFilter
 })
 
-// 2. Filter logic (Client-side filtering)
 const filteredShows = computed(() => {
-  if (!showsStore.hasShows) return []
+  // Case A: Active Search Query (Server-side results from Store)
+  if (localSearchQuery.value.trim().length >= 3) {
+    let results = showsStore.searchResults
 
-  let result = showsStore.shows
-
-  // Filter by Genre
-  if (selectedGenre.value !== 'All') {
-    result = result.filter(show => show.genres.includes(selectedGenre.value))
+    // Apply client-side genre filter on top of search results
+    if (selectedGenre.value !== 'All') {
+      results = filterShowsByGenre(results, selectedGenre.value)
+    }
+    return results
   }
 
-  // Filter by Search Query (Case insensitive)
-  if (searchQuery.value.trim()) {
-    const query = searchQuery.value.toLowerCase()
-    result = result.filter(show => show.name.toLowerCase().includes(query))
+  // Case B: Genre Filter Only (Local filtering of "All Shows")
+  if (selectedGenre.value !== 'All' && showsStore.hasShows) {
+    return filterShowsByGenre(showsStore.shows, selectedGenre.value)
   }
 
-  return result
+  return []
 })
 
-// 3. Get available genres for the filter buttons
+// Available genres for filter
 const availableGenres = computed(() => {
   return showsStore.genreGroups.map(g => g.genre)
 })
 
 // --- Actions ---
 const clearFilters = () => {
-  searchQuery.value = ''
+  localSearchQuery.value = ''
   selectedGenre.value = 'All'
+  showsStore.clearSearch()
 }
 
 onMounted(async () => {
@@ -61,7 +83,7 @@ onMounted(async () => {
   <div class="home">
     <HomeHero>
       <template #search>
-        <SearchBar v-model="searchQuery" />
+        <SearchBar v-model="localSearchQuery" />
       </template>
       <template #filters>
         <GenreFilter v-model="selectedGenre" :genres="availableGenres" />
@@ -69,25 +91,38 @@ onMounted(async () => {
     </HomeHero>
 
     <div class="container main-content">
-      <!-- Loading State -->
-      <div v-if="showsStore.loading" class="loading-container">
+      <!-- Initial Library Loading State -->
+      <!-- We check 'loading' AND 'not searching' to differentiate initial load vs search load -->
+      <div v-if="showsStore.loading && !showsStore.isSearching" class="loading-container">
         <div class="spinner"></div>
         <p>Loading library...</p>
       </div>
 
-      <!-- Error State -->
-      <div v-else-if="showsStore.error" class="error-container">
+      <!-- Global Error State -->
+      <div v-else-if="showsStore.error && !showsStore.isSearching" class="error-container">
         <p>Unable to load shows. {{ showsStore.error }}</p>
       </div>
 
-      <!-- VIEW A: Search Results -->
-      <SearchResults
-        v-else-if="isSearchActive"
-        :shows="filteredShows"
-        :search-query="searchQuery"
-        :selected-genre="selectedGenre"
-        @clear="clearFilters"
-      />
+      <!-- VIEW A: Search Results (Active if Query >= 3 chars OR Genre selected) -->
+      <div v-else-if="isSearchActive">
+        <!-- Search Specific Loading State -->
+        <div
+          v-if="showsStore.loading && showsStore.isSearching"
+          class="loading-container search-loading"
+        >
+          <div class="spinner"></div>
+          <p>Searching TVMaze...</p>
+        </div>
+
+        <!-- Results Component -->
+        <SearchResult
+          v-else
+          :shows="filteredShows"
+          :search-query="localSearchQuery"
+          :selected-genre="selectedGenre"
+          @clear="clearFilters"
+        />
+      </div>
 
       <!-- VIEW B: Browse by Genre (Default) -->
       <div v-else-if="showsStore.genreGroups.length" class="genre-sections-list">
@@ -135,6 +170,11 @@ onMounted(async () => {
   color: var(--color-text-secondary);
   text-align: center;
   min-height: 400px;
+}
+
+/* Specific height for search loading to prevent layout jumpiness */
+.search-loading {
+  min-height: 200px;
 }
 
 .spinner {
