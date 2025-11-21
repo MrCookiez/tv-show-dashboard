@@ -89,7 +89,7 @@ const cleanSummary = computed(() => {
           <div class="details-grid">
             <!-- Summary Card (Full Width) -->
             <div class="info-card full-width">
-              <h3 class="label">SUMMARY</h3>
+              <h3 class="label">FULL SUMMARY</h3>
               <p class="text-content">{{ cleanSummary }}</p>
             </div>
 
