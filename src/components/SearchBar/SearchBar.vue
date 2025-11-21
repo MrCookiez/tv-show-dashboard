@@ -42,7 +42,7 @@ const onInput = () => {
   display: flex;
   align-items: center;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md, 8px);
   padding: 8px;
   width: 100%;
@@ -52,7 +52,7 @@ const onInput = () => {
 }
 
 .search-bar:focus-within {
-  border-color: var(--color-text-secondary);
+  border-color: var(--color-brand-primary);
 }
 
 .search-input {
