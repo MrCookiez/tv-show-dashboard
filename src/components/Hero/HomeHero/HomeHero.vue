@@ -1,4 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SearchBar from '../../SearchBar/SearchBar.vue'
+import GenreFilter from '../../GenreFilter/GenreFilter.vue'
+
+defineProps<{
+  searchQuery: string
+  selectedGenre: string
+  genres: string[]
+}>()
+
+defineEmits<{
+  (e: 'update:searchQuery', value: string): void
+  (e: 'update:selectedGenre', value: string): void
+}>()
+</script>
 
 <template>
   <section class="home-hero">
@@ -6,14 +20,21 @@
       <h1 class="hero-title">Discover TV Shows</h1>
       <p class="hero-subtitle">Search and explore shows by genre</p>
 
-      <!-- Slot for SearchBar component -->
+      <!-- Search Bar (Proxied v-model) -->
       <div class="hero-content">
-        <slot name="search"></slot>
+        <SearchBar
+          :model-value="searchQuery"
+          @update:model-value="$emit('update:searchQuery', $event)"
+        />
       </div>
 
-      <!-- Slot for GenreFilter component -->
+      <!-- Genre Filter (Proxied v-model) -->
       <div class="hero-filters">
-        <slot name="filters"></slot>
+        <GenreFilter
+          :model-value="selectedGenre"
+          :genres="genres"
+          @update:model-value="$emit('update:selectedGenre', $event)"
+        />
       </div>
     </div>
   </section>
@@ -43,6 +64,8 @@
 
 .hero-content {
   margin-bottom: var(--spacing-4);
+  display: flex;
+  justify-content: center;
 }
 
 .hero-filters {

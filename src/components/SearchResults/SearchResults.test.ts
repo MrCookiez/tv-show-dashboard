@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import SearchResults from './SearchResult.vue'
+import SearchResults from './SearchResults.vue'
 import type { Show } from '../../types/shows'
 
 describe('SearchResults', () => {
