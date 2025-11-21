@@ -146,6 +146,7 @@ const cleanSummary = computed(() => {
   gap: var(--spacing-8);
   padding-top: var(--spacing-8);
   padding-bottom: var(--spacing-16);
+  padding: var(--spacing-8) var(--spacing-12);
 }
 
 /* Sidebar / Poster */
