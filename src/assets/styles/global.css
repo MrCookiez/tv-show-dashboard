@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
 html {
   color-scheme: light dark;
 }
@@ -21,24 +23,27 @@ h6 {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4); /* Added generic spacing */
 }
 
 h1 {
   font-size: var(--font-size-4xl);
 }
-
 h2 {
   font-size: var(--font-size-3xl);
 }
-
 h3 {
   font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
 }
 
 /* Links */
 a {
-  color: var(--color-primary);
+  color: var(--color-primary); /* Now works due to mapping in theme.css */
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
@@ -69,6 +74,8 @@ a:hover {
 /* App Layout */
 #app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Responsive Typography */
@@ -76,8 +83,10 @@ a:hover {
   h1 {
     font-size: var(--font-size-3xl);
   }
-
   h2 {
     font-size: var(--font-size-2xl);
+  }
+  h3 {
+    font-size: var(--font-size-xl);
   }
 }
