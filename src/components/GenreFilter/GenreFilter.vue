@@ -58,7 +58,7 @@ const toggleExpand = () => {
 
     <!-- Toggle Button -->
     <button v-if="showToggle" class="genre-pill toggle-btn" @click="toggleExpand">
-      {{ isExpanded ? 'See less' : '+ more' }}
+      {{ isExpanded ? 'Less genres' : '+ More genres' }}
     </button>
   </div>
 </template>

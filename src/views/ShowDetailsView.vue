@@ -210,7 +210,7 @@ const cleanSummary = computed(() => {
 .label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
+  color: var(--color-brand-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;

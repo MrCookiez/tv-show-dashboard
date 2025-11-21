@@ -113,8 +113,16 @@ const goBack = () => {
 }
 
 .back-btn:hover {
-  background-color: var(--color-surface-dim);
-  border-color: var(--color-text-secondary);
+  background-color: var(--color-brand-secondary);
+  color: var(--color-surface);
+  border-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .back-btn {
+    width: fit-content;
+    margin: var(--spacing-8) 0 0 0;
+  }
 }
 
 @media screen and (min-width: 768px) {
