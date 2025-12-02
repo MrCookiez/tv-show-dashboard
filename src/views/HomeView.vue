@@ -97,12 +97,6 @@ watch(
     />
 
     <div class="container main-content">
-      <SearchResults
-        :shows="filteredShows"
-        :search-query="localSearchQuery"
-        :selected-genre="selectedGenre"
-        @clear="clearFilters"
-      />
       <!-- Loading & Error States -->
       <div v-if="showsStore.loading && !showsStore.isSearching" class="loading-container">
         <div class="spinner"></div>
