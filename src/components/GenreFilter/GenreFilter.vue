@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = withDefaults(
   defineProps<{
@@ -20,6 +23,7 @@ const isExpanded = ref(false)
 
 const selectGenre = (genre: string) => {
   emit('update:modelValue', genre)
+  router.push({ path: '/', query: { genre } })
 }
 
 // All available options including 'All'

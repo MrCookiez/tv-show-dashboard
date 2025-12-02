@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { debounce } from 'lodash'
 import { useShowsStore } from '../store/showsStore'
 import { filterShowsByGenre } from '../utils/showsUtils'
@@ -8,6 +9,8 @@ import SearchResults from '../components/SearchResults/SearchResults.vue'
 import HomeHero from '../components/Hero/HomeHero/HomeHero.vue'
 
 const showsStore = useShowsStore()
+
+const route = useRoute()
 
 // --- Local State for UI Inputs ---
 const localSearchQuery = ref('')
@@ -58,7 +61,30 @@ const clearFilters = () => {
 
 onMounted(async () => {
   await showsStore.loadAllShows()
+  // Initialize selectedGenre from the `genre` query param if present
+  // Normalize against available genres so casing mismatches (e.g. 'drama') still resolve
+  const raw = (route.query.genre as string) || ''
+  if (raw) {
+    const match = availableGenres.value.find(g => g.toLowerCase() === raw.toLowerCase())
+    selectedGenre.value = match || 'All'
+  } else {
+    selectedGenre.value = 'All'
+  }
 })
+
+// Sync selected genre when the `genre` query param changes (e.g. back/forward)
+watch(
+  () => route.query.genre,
+  newVal => {
+    const raw = (newVal as string) || ''
+    if (raw) {
+      const match = availableGenres.value.find(g => g.toLowerCase() === raw.toLowerCase())
+      selectedGenre.value = match || 'All'
+    } else {
+      selectedGenre.value = 'All'
+    }
+  }
+)
 </script>
 
 <template>
@@ -71,6 +97,12 @@ onMounted(async () => {
     />
 
     <div class="container main-content">
+      <SearchResults
+        :shows="filteredShows"
+        :search-query="localSearchQuery"
+        :selected-genre="selectedGenre"
+        @clear="clearFilters"
+      />
       <!-- Loading & Error States -->
       <div v-if="showsStore.loading && !showsStore.isSearching" class="loading-container">
         <div class="spinner"></div>
